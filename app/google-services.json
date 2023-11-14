@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "463553282524",
+    "project_id": "mojanovaaplikacija-1037f",
+    "storage_bucket": "mojanovaaplikacija-1037f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463553282524:android:dc0bea349e237315bd4f19",
+        "android_client_info": {
+          "package_name": "ba.fsre.mojanovaaplikacija"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0B9KRd6YFkfNA1WflqvwQPLx2j_gCTs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
