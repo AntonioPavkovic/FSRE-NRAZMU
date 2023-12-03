@@ -1,72 +1,63 @@
 package ba.fsre.mojanovaaplikacija;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-
-import org.jetbrains.annotations.NotNull;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import ba.fsre.mojanovaaplikacija.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
+    FirebaseDatabase db;
+
+    String gender;
+
+    String uuid = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
 
-        auth = FirebaseAuth.getInstance();
+        this.db = FirebaseDatabase.getInstance();
 
-        EditText emailTxt = findViewById(R.id.emailTxt);
-        EditText passwordTxt = findViewById(R.id.passwordTxt);
+        EditText firstnameTxt = findViewById(R.id.first_name);
+        EditText lastnameTxt = findViewById(R.id.last_name);
+        RadioGroup genderGroup = findViewById(R.id.gender);
+        EditText dateOfBirthTxt = findViewById(R.id.birth_date);
+        EditText cityTxt = findViewById(R.id.city);
+        EditText countryTxt = findViewById(R.id.country);
 
-        Button loginBtn = findViewById(R.id.loginBtn);
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                String email = emailTxt.getText().toString();
-                String password = passwordTxt.getText().toString();
-                if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Pogresni korisnicki podaci",
-                            Toast.LENGTH_LONG
-                    ).show();
-                }
-                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    "Uspjesno ste se prijavili",
-                                    Toast.LENGTH_LONG).show();
-
-                            Intent i = new Intent(MainActivity.this, ProfileActivity.class);
-                            startActivity(i);
-                        } else {
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    "Pogresni korisnicki podaci",
-                                    Toast.LENGTH_LONG
-                            ).show();
-                        }
-                    }
-                });
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedBtn = findViewById(checkedId);
+                gender = checkedBtn.getText().toString();
             }
         });
 
+        Button submitBtn = findViewById(R.id.submit_button);
+        DatabaseReference usersDbRef = this.db.getReference("users");
+
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User u = new User(
+                        firstnameTxt.getText().toString(),
+                        lastnameTxt.getText().toString(),
+                        gender,
+                        dateOfBirthTxt.getText().toString(),
+                        cityTxt.getText().toString(),
+                        countryTxt.getText().toString()
+                );
+                usersDbRef.child(uuid).setValue(u);
+            }
+        });
     }
 }

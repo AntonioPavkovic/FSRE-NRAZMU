@@ -3,7 +3,7 @@ package ba.fsre.mojanovaaplikacija.model;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
-public class Users {
+public class User {
 
     public String firstName;
 
@@ -18,9 +18,9 @@ public class Users {
     public String country;
 
 
-    public Users(){}
+    public User(){}
 
-    public Users(String firstName, String lastName, String phone, String address, String place, String country) {
+    public User(String firstName, String lastName, String phone, String address, String place, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
