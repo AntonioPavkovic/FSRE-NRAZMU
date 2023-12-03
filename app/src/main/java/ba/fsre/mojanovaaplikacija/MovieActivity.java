@@ -1,13 +1,16 @@
 package ba.fsre.mojanovaaplikacija;
 
-import android.os.Bundle;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.FirebaseDatabase;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
+
 import ba.fsre.mojanovaaplikacija.adapter.MovieAdapter;
 import ba.fsre.mojanovaaplikacija.fragments.AddMovieDialogFragment;
 import ba.fsre.mojanovaaplikacija.model.Movie;
@@ -20,7 +23,7 @@ public class MovieActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie);
+        setContentView(R.layout.activity_movie2);
         this.movieRecyclerView = findViewById(R.id.movieListView);
         this.movieRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this)
